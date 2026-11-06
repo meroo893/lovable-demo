@@ -19,19 +19,19 @@ export function TipCard({ tip, done, onToggleDone }: Props) {
   return (
     <article
       id={`tip-${tip.id}`}
-      className={`notebook scroll-mt-24 rounded-xl border-2 p-6 pl-16 shadow-md sm:pl-[72px] ${
-        done ? "border-emerald-400 dark:border-emerald-600" : "border-amber-200 dark:border-slate-700"
+      className={`notebook scroll-mt-24 rounded-xl p-6 pl-16 shadow-md sm:pl-[72px] ${
+        done ? "!border-emerald-500" : ""
       }`}
     >
       <div className="flex items-start gap-4">
-        <span className="font-hand -ml-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-pencil text-3xl font-bold text-board shadow">
+        <span className="font-hand -ml-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent text-3xl font-bold text-onaccent shadow">
           {tip.id}
         </span>
         <div className="min-w-0 flex-1">
-          <span className="text-xs font-bold uppercase tracking-wider text-red-600 dark:text-red-400">
+          <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
             {tip.tag}
           </span>
-          <h3 className="font-hand mt-0.5 text-3xl font-bold leading-tight text-board dark:text-amber-200">
+          <h3 className="font-hand mt-0.5 text-3xl font-bold leading-tight text-head">
             {tip.title}
           </h3>
           <p className="mt-2 text-slate-700 dark:text-slate-300">{tip.summary}</p>
@@ -67,7 +67,7 @@ export function TipCard({ tip, done, onToggleDone }: Props) {
         <button
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
-          className="flex items-center gap-1 text-sm font-bold text-board hover:underline dark:text-amber-200"
+          className="flex items-center gap-1 text-sm font-bold text-slate-800 hover:underline dark:text-slate-200"
         >
           Защо работи?
           <ChevronDown size={16} className={`transition-transform ${open ? "rotate-180" : ""}`} />
@@ -78,7 +78,7 @@ export function TipCard({ tip, done, onToggleDone }: Props) {
         </label>
       </div>
       {open && (
-        <p className="mt-3 rounded-lg bg-amber-100/80 p-4 text-sm text-slate-800 dark:bg-slate-800 dark:text-slate-200">
+        <p className="mt-3 rounded-lg bg-black/5 p-4 text-sm text-slate-800 dark:bg-slate-800 dark:text-slate-200">
           {tip.why}
         </p>
       )}

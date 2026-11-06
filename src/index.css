@@ -2,28 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---- Палитри: board = голям цвят, accent = акцент, paper = фон ---- */
+html,
+html[data-palette="sunny"] {
+  --c-board: #009b4d;
+  --c-on-board: #04170c;
+  --c-accent: #ffcc00;
+  --c-on-accent: #1f2937;
+  --c-paper: #faf5e9;
+  --c-margin: #009b4d;
+  --c-head-light: #009b4d;
+  --c-head-dark: #ffcc00;
+}
+html[data-palette="rose"] {
+  --c-board: #a8d5e3;
+  --c-on-board: #1f2937;
+  --c-accent: #ff78ac;
+  --c-on-accent: #1f2937;
+  --c-paper: #f2f0ea;
+  --c-margin: #ff78ac;
+  --c-head-light: #1f2937;
+  --c-head-dark: #a8d5e3;
+}
+html[data-palette="forest"] {
+  --c-board: #205a28;
+  --c-on-board: #ffffff;
+  --c-accent: #c72b32;
+  --c-on-accent: #ffffff;
+  --c-paper: #ffffff;
+  --c-margin: #c72b32;
+  --c-head-light: #205a28;
+  --c-head-dark: #ffffff;
+}
+html { --c-head: var(--c-head-light); }
+html.dark { --c-head: var(--c-head-dark); }
+
 html { scroll-behavior: smooth; }
-body { @apply bg-amber-50 text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-100; }
+body {
+  @apply bg-paper text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-100;
+}
 
 @layer components {
+  .site-header {
+    background-color: color-mix(in srgb, var(--c-paper) 90%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, #1f2937 12%, transparent);
+  }
+  .dark .site-header {
+    background-color: rgb(2 6 23 / 0.85);
+    border-bottom-color: rgb(30 41 59);
+  }
   .notebook {
-    background-color: #fffdf5;
+    background-color: color-mix(in srgb, var(--c-paper) 45%, white);
+    border: 2px solid color-mix(in srgb, var(--c-margin) 40%, transparent);
     background-image:
-      linear-gradient(to right, transparent 54px, #f4a3a3 54px, #f4a3a3 56px, transparent 56px),
-      repeating-linear-gradient(transparent, transparent 31px, #cfe3f1 31px, #cfe3f1 32px);
+      linear-gradient(to right, transparent 54px, color-mix(in srgb, var(--c-margin) 65%, transparent) 54px, color-mix(in srgb, var(--c-margin) 65%, transparent) 56px, transparent 56px),
+      repeating-linear-gradient(transparent, transparent 31px, rgb(31 41 55 / 0.12) 31px, rgb(31 41 55 / 0.12) 32px);
   }
   .dark .notebook {
     background-color: #1e293b;
+    border-color: #334155;
     background-image:
-      linear-gradient(to right, transparent 54px, #7f3b3b 54px, #7f3b3b 56px, transparent 56px),
+      linear-gradient(to right, transparent 54px, color-mix(in srgb, var(--c-margin) 55%, transparent) 54px, color-mix(in srgb, var(--c-margin) 55%, transparent) 56px, transparent 56px),
       repeating-linear-gradient(transparent, transparent 31px, #334155 31px, #334155 32px);
   }
   .chalkboard {
-    background-color: #24473a;
-    background-image: radial-gradient(ellipse at 30% 20%, rgba(255,255,255,0.08), transparent 60%);
-    border: 10px solid #a0693a;
-    box-shadow: inset 0 0 40px rgba(0,0,0,0.35), 0 10px 25px rgba(0,0,0,0.2);
+    background-color: var(--c-board);
+    color: var(--c-on-board);
+    background-image: radial-gradient(ellipse at 30% 20%, rgb(255 255 255 / 0.12), transparent 60%);
+    border: 10px solid var(--c-accent);
+    box-shadow: inset 0 0 30px rgb(0 0 0 / 0.12), 0 10px 25px rgb(0 0 0 / 0.15);
   }
+  .chip {
+    background-color: rgb(255 255 255 / 0.7);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, #1f2937 18%, transparent);
+  }
+  .chip:hover { background-color: rgb(255 255 255 / 0.95); }
+  .dark .chip { background-color: #0f172a; box-shadow: inset 0 0 0 1px #1e293b; color: #cbd5e1; }
+  .dark .chip:hover { background-color: #1e293b; }
 }
 
 @media (prefers-reduced-motion: reduce) {

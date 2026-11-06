@@ -11,6 +11,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap&subset=cyrillic" rel="stylesheet" />
+    <script>
+      try {
+        var d = document.documentElement;
+        var pal = localStorage.getItem("pe-palette");
+        if (pal) d.dataset.palette = pal;
+        var t = localStorage.getItem("theme");
+        if (t ? t === "dark" : matchMedia("(prefers-color-scheme: dark)").matches) d.classList.add("dark");
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
