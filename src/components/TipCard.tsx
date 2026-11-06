@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check, Copy, ThumbsDown, ThumbsUp, ChevronDown } from "lucide-react";
+import { Check, Copy, ChevronDown, Pencil, CheckCircle2 } from "lucide-react";
 import type { Tip } from "@/data/tips";
 
 type Props = { tip: Tip; done: boolean; onToggleDone: () => void };
@@ -19,39 +19,41 @@ export function TipCard({ tip, done, onToggleDone }: Props) {
   return (
     <article
       id={`tip-${tip.id}`}
-      className={`scroll-mt-24 rounded-2xl border bg-white p-6 shadow-sm transition dark:bg-slate-900 ${
-        done ? "border-emerald-300 dark:border-emerald-700" : "border-slate-200 dark:border-slate-800"
+      className={`notebook scroll-mt-24 rounded-xl border-2 p-6 pl-16 shadow-md sm:pl-[72px] ${
+        done ? "border-emerald-400 dark:border-emerald-600" : "border-amber-200 dark:border-slate-700"
       }`}
     >
       <div className="flex items-start gap-4">
-        <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-fuchsia-500 text-lg font-bold text-white">
+        <span className="font-hand -ml-1 flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-pencil text-3xl font-bold text-board shadow">
           {tip.id}
         </span>
         <div className="min-w-0 flex-1">
-          <span className="text-xs font-semibold uppercase tracking-wider text-violet-600 dark:text-violet-400">
+          <span className="text-xs font-bold uppercase tracking-wider text-red-600 dark:text-red-400">
             {tip.tag}
           </span>
-          <h3 className="mt-0.5 text-xl font-bold">{tip.title}</h3>
-          <p className="mt-2 text-slate-600 dark:text-slate-400">{tip.summary}</p>
+          <h3 className="font-hand mt-0.5 text-3xl font-bold leading-tight text-board dark:text-amber-200">
+            {tip.title}
+          </h3>
+          <p className="mt-2 text-slate-700 dark:text-slate-300">{tip.summary}</p>
         </div>
       </div>
 
       <div className="mt-5 grid gap-3 md:grid-cols-2">
-        <div className="rounded-xl border border-rose-200 bg-rose-50 p-4 dark:border-rose-900/60 dark:bg-rose-950/30">
-          <div className="mb-2 flex items-center gap-1.5 text-sm font-semibold text-rose-700 dark:text-rose-400">
-            <ThumbsDown size={15} /> Слаб промпт
+        <div className="rounded-lg border-2 border-dashed border-red-300 bg-white/80 p-4 dark:border-red-800 dark:bg-slate-900/70">
+          <div className="font-hand mb-2 flex items-center gap-1.5 text-xl font-bold text-red-600 dark:text-red-400">
+            <Pencil size={16} /> Може по-добре
           </div>
           <p className="whitespace-pre-line font-mono text-sm text-slate-700 dark:text-slate-300">{tip.bad}</p>
         </div>
-        <div className="relative rounded-xl border border-emerald-200 bg-emerald-50 p-4 dark:border-emerald-900/60 dark:bg-emerald-950/30">
+        <div className="rounded-lg border-2 border-emerald-400 bg-white/80 p-4 dark:border-emerald-700 dark:bg-slate-900/70">
           <div className="mb-2 flex items-center justify-between">
-            <span className="flex items-center gap-1.5 text-sm font-semibold text-emerald-700 dark:text-emerald-400">
-              <ThumbsUp size={15} /> Добър промпт
+            <span className="font-hand flex items-center gap-1.5 text-xl font-bold text-emerald-700 dark:text-emerald-400">
+              <CheckCircle2 size={16} /> Отличен 6
             </span>
             <button
               onClick={copy}
               aria-label="Копирай добрия промпт"
-              className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-medium text-emerald-700 transition hover:bg-emerald-100 dark:text-emerald-400 dark:hover:bg-emerald-900/40"
+              className="flex items-center gap-1 rounded-md px-2 py-1 text-xs font-bold text-emerald-700 transition hover:bg-emerald-100 dark:text-emerald-400 dark:hover:bg-emerald-900/40"
             >
               {copied ? <Check size={14} /> : <Copy size={14} />}
               {copied ? "Копирано" : "Копирай"}
@@ -65,23 +67,18 @@ export function TipCard({ tip, done, onToggleDone }: Props) {
         <button
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
-          className="flex items-center gap-1 text-sm font-medium text-violet-700 hover:underline dark:text-violet-400"
+          className="flex items-center gap-1 text-sm font-bold text-board hover:underline dark:text-amber-200"
         >
           Защо работи?
           <ChevronDown size={16} className={`transition-transform ${open ? "rotate-180" : ""}`} />
         </button>
-        <label className="flex cursor-pointer select-none items-center gap-2 text-sm text-slate-600 dark:text-slate-400">
-          <input
-            type="checkbox"
-            checked={done}
-            onChange={onToggleDone}
-            className="h-4 w-4 accent-emerald-600"
-          />
-          Усвоих го
+        <label className="flex cursor-pointer select-none items-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-300">
+          <input type="checkbox" checked={done} onChange={onToggleDone} className="h-4 w-4 accent-emerald-600" />
+          Научих урока
         </label>
       </div>
       {open && (
-        <p className="mt-3 rounded-lg bg-violet-50 p-4 text-sm text-slate-700 dark:bg-violet-950/30 dark:text-slate-300">
+        <p className="mt-3 rounded-lg bg-amber-100/80 p-4 text-sm text-slate-800 dark:bg-slate-800 dark:text-slate-200">
           {tip.why}
         </p>
       )}

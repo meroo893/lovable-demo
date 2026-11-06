@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Sparkles, ArrowDown } from "lucide-react";
+import { GraduationCap, ArrowDown, ShieldAlert } from "lucide-react";
 import { tips } from "@/data/tips";
 import { TipCard } from "@/components/TipCard";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -33,16 +33,16 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      <header className="sticky top-0 z-10 border-b border-slate-200/70 bg-white/80 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/80">
+      <header className="sticky top-0 z-10 border-b border-amber-200/70 bg-amber-50/90 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/80">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 py-3">
           <a href="#" className="flex items-center gap-2 font-bold">
-            <Sparkles size={20} className="text-violet-600" />
-            Промпт Инженеринг
+            <GraduationCap size={22} className="text-board dark:text-pencil" />
+            AI за учители
           </a>
           <div className="flex items-center gap-3">
             <div className="hidden items-center gap-2 text-sm text-slate-600 sm:flex dark:text-slate-400">
               <div className="h-2 w-28 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
-                <div className="h-full bg-emerald-500 transition-all" style={{ width: `${progress}%` }} />
+                <div className="h-full bg-pencil transition-all" style={{ width: `${progress}%` }} />
               </div>
               {done.length}/{tips.length}
             </div>
@@ -51,27 +51,23 @@ export default function App() {
         </div>
       </header>
 
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-violet-100 via-fuchsia-50 to-transparent dark:from-violet-950/50 dark:via-fuchsia-950/20" />
-        <div className="mx-auto max-w-5xl px-4 py-20 text-center md:py-28">
-          <span className="inline-block rounded-full bg-violet-600/10 px-3 py-1 text-sm font-medium text-violet-700 dark:text-violet-300">
-            Ръководство за начинаещи и напреднали
+      <section className="px-4 py-10 md:py-14">
+        <div className="chalkboard mx-auto max-w-5xl rounded-lg px-6 py-14 text-center text-white md:py-20">
+          <span className="font-hand inline-block rounded-full border border-white/30 px-4 py-1 text-xl text-pencil">
+            Ръководство за учители
           </span>
-          <h1 className="mt-5 text-4xl font-extrabold tracking-tight md:text-6xl">
-            10 съвета за{" "}
-            <span className="bg-gradient-to-r from-violet-600 to-fuchsia-500 bg-clip-text text-transparent">
-              по-добри промптове
-            </span>
+          <h1 className="font-hand mt-4 text-5xl font-bold leading-tight md:text-7xl">
+            10 съвета за <span className="text-pencil underline decoration-wavy decoration-white/40 underline-offset-8">по-добри промптове</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-slate-600 dark:text-slate-400">
-            Промпт инженерингът е умението да общуваш ясно с AI модели. Ето 10 практични техники –
-            всяка с пример „преди“ и „след“, който можеш да копираш и пробваш веднага.
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-white/85">
+            Планове на уроци, тестове, обратна връзка за учениците – научи как да поискаш от AI точно това,
+            което ти трябва. Всеки съвет има пример, който можеш да копираш и да пробваш веднага.
           </p>
           <a
             href="#tips"
-            className="mt-8 inline-flex items-center gap-2 rounded-xl bg-violet-600 px-6 py-3 font-semibold text-white shadow-lg shadow-violet-600/25 transition hover:bg-violet-700"
+            className="mt-8 inline-flex items-center gap-2 rounded-xl bg-pencil px-6 py-3 font-bold text-board shadow-lg transition hover:brightness-110"
           >
-            Към съветите <ArrowDown size={18} />
+            Към урока <ArrowDown size={18} />
           </a>
         </div>
       </section>
@@ -83,10 +79,10 @@ export default function App() {
               key={t}
               onClick={() => setFilter(t)}
               aria-pressed={filter === t}
-              className={`rounded-full px-4 py-1.5 text-sm font-medium transition ${
+              className={`rounded-full px-4 py-1.5 text-sm font-bold transition ${
                 filter === t
-                  ? "bg-violet-600 text-white"
-                  : "bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-100 dark:bg-slate-900 dark:text-slate-300 dark:ring-slate-800 dark:hover:bg-slate-800"
+                  ? "bg-board text-white"
+                  : "bg-white text-slate-700 ring-1 ring-amber-200 hover:bg-amber-100 dark:bg-slate-900 dark:text-slate-300 dark:ring-slate-800 dark:hover:bg-slate-800"
               }`}
             >
               {t}
@@ -101,15 +97,23 @@ export default function App() {
         </div>
 
         {done.length === tips.length && (
-          <div className="mt-10 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-500 p-6 text-center text-white">
-            <p className="text-xl font-bold">🎉 Браво! Усвои всички 10 съвета.</p>
-            <p className="mt-1 opacity-90">Сега е време за практика – пробвай ги в следващия си разговор с AI.</p>
+          <div className="mt-10 rounded-2xl bg-board p-6 text-center text-white">
+            <p className="font-hand text-4xl font-bold text-pencil">Отличен 6! 🍎</p>
+            <p className="mt-1 opacity-90">Научи всички 10 урока. Сега е време за практика в следващия ти час.</p>
           </div>
         )}
+
+        <aside className="mt-10 flex gap-3 rounded-xl border-2 border-red-200 bg-red-50 p-5 text-sm text-red-900 dark:border-red-900 dark:bg-red-950/30 dark:text-red-200">
+          <ShieldAlert className="mt-0.5 shrink-0" size={20} />
+          <p>
+            <strong>Важно:</strong> не въвеждайте в AI имена, ЕГН, оценки или други лични данни на ученици.
+            Заменяйте ги с „Ученик А“ и винаги проверявайте генерираното съдържание, преди да го ползвате.
+          </p>
+        </aside>
       </main>
 
-      <footer className="border-t border-slate-200 py-8 text-center text-sm text-slate-500 dark:border-slate-800">
-        Създадено с ❤️ в София · Хоствано в Lovable
+      <footer className="border-t border-amber-200 py-8 text-center text-sm text-slate-500 dark:border-slate-800">
+        Направено с ❤️ за учителите · Хоствано в Lovable
       </footer>
     </div>
   );
